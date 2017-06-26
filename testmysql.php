@@ -1,12 +1,16 @@
 ﻿<?php
     $conn=mysql_connect("localhost","root","");
-    if(!$conn){
+
+    if(!$conn)
+    {
         die("数据库连接失败：".mysql_error());
     }else{
         echo("连接数据库成功");
         echo("<br>");
     }
-    if(@mysql_query("CREATE DATABASE testdb",$conn)){
+
+    if(@mysql_query("CREATE DATABASE testdb",$conn))
+    {
     	echo("创建数据库成功");
     	echo("<br>");
     }else{
@@ -16,14 +20,15 @@
     // 选择数据库
     mysql_select_db("testdb",$conn);
     $sql="CREATE TABLE user(
-    uid mediumint(8),
-    username varchar(20),
-    password char(20),
-    email varchar(40),
-    regdata int(10)
-    )";
+   		 	uid mediumint(8),
+    	 	username varchar(20),
+    	 	password char(20),
+    	 	email varchar(40),
+   		 	regdata int(10)
+    	)";
 
-    if(!mysql_query($sql,$conn)){
+    if(!mysql_query($sql,$conn))
+    {
         echo("创建数据表失败:".mysql_error());
         echo("<br>");
     }else{
@@ -51,5 +56,57 @@
     	echo("<br>");
 
     }
+    //修改表
+    $sql3 = "ALTER TABLE user2 ADD status TINYINT(1) UNSIGNED NULL;";
+    if(mysql_query($sql3,$conn))
+    {
+    	echo("修改表成功");
+    	echo("<br>");
+    }else{
+    	echo("修改表失败".mysql_error());
+    	echo("<br>");
+    }
 
+    //删除表
+   	// $sql4="ALTER TABLE user2 DROP status;";
+   	// if(mysql_query($sql4,$conn))
+   	// {
+   	// 	echo("删除表成功");
+   	// 	echo("<br>");
+   	// }else{
+   	// 	echo("删除表失败".mysql_error());
+   	// 	echo("<br>");
+   	// }
+
+   	// 改变字段及属性
+   	$sql5="ALTER TABLE user2 CHANGE status status_bak INT(8) UNSIGNED NULL DEFAULT 1;";
+   	if(mysql_query($sql5,$conn))
+   	{
+   		echo("改变成功");
+   		echo("<br>");
+   	}else{
+   		echo("改变失败".mysql_error());
+   		echo("<br>");
+   	}
+
+   	//增加索引（或表约束等其他）属性
+   	$sql6="ALTER TABLE user2 ADD INDEX (status_bak)";
+   	if(mysql_query($sql6,$conn)){
+   		echo("增加索引成功");
+   		echo("<br>")
+   	}else{
+   		echo("增加索引失败".mysql_error());
+   		echo("<br>");
+   	}
+
+   	//对表进行重命名
+   	$sql7="RENAME TABLE user2 TO user3";
+   	if(mysql_query($sql7,$conn))
+   	{
+   		echo("重命名成功");
+   		echo("<br>");
+   	}else{
+   		echo("重命名失败".mysql_error);
+   		echo("<br>");
+   	}
 ?>
