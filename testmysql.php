@@ -93,7 +93,7 @@
    	$sql6="ALTER TABLE user2 ADD INDEX (status_bak)";
    	if(mysql_query($sql6,$conn)){
    		echo("增加索引成功");
-   		echo("<br>")
+   		echo("<br>");
    	}else{
    		echo("增加索引失败".mysql_error());
    		echo("<br>");
@@ -108,5 +108,18 @@
    	}else{
    		echo("重命名失败".mysql_error);
    		echo("<br>");
+   	}
+
+   	//添加数据
+   	//为避免中文乱码做入库编码转换
+   	mysql_query("set names 'utf8'");
+   	$password=md5("123456");
+   	$regdate=time();
+   	$sql8="INSERT INTO user2(username,password,email,regdate) VALUES ('小王','$password','813419496@qq.com','$regdate')";
+
+   	if(!mysql_query($sql8,$conn)){
+   		echo "添加数据失败：".mysql_error();
+   	}else{
+   		echo "添加数据成功";
    	}
 ?>
