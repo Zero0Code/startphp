@@ -122,4 +122,17 @@
    	}else{
    		echo "添加数据成功";
    	}
+
+    //查询数据
+   	mysql_query("set character set 'utf8'");
+   	$sql9="SELECT * FROM user2";
+   	$result=mysql_query($sql9);
+
+   	while($row=mysql_fetch_array($result))
+   	{
+   		echo "用户名：".$row['username']."<br/>";
+   		echo "电子邮箱：".$row['email']."<br/>";
+   		echo "注册日期：".date("Y-m-d",$row['regdate'])."<br/><br/>";
+   	}
+   	// echo 1;
 ?>
