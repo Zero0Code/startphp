@@ -106,7 +106,7 @@
    		echo("重命名成功");
    		echo("<br>");
    	}else{
-   		echo("重命名失败".mysql_error);
+   		echo("重命名失败".mysql_error());
    		echo("<br>");
    	}
 
@@ -119,8 +119,10 @@
 
    	if(!mysql_query($sql8,$conn)){
    		echo "添加数据失败：".mysql_error();
+   		echo "<br/>";
    	}else{
    		echo "添加数据成功";
+   		echo "<br/>";
    	}
 
     //查询数据
@@ -134,5 +136,13 @@
    		echo "电子邮箱：".$row['email']."<br/>";
    		echo "注册日期：".date("Y-m-d",$row['regdate'])."<br/><br/>";
    	}
-   	// echo 1;
+ 
+ 	// $sql10="SELECT * FROM user2 WHERE username='小王'";
+ 	// $result=mysql_query($sql10);
+ 	// while($row=mysql_fetch_array($result))
+  //  	{
+  //  		echo "用户名：".$row['username']."<br/>";
+  //  		echo "电子邮箱：".$row['email']."<br/>";
+  //  		echo "注册日期：".date("Y-m-d",$row['regdate'])."<br/><br/>";
+  //  	}
 ?>
